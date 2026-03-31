@@ -1,0 +1,17 @@
+{
+  "description": "resume-craft plugin hooks",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "if [ -f \"$HOME/.claude/resume-craft/profile.json\" ]; then echo '{\"suppressOutput\":false,\"systemMessage\":\"resume-craft: User has a profile at ~/.claude/resume-craft/profile.json. Commands: /resume [url], /resume-profile, /resume-templates\"}'; else echo '{\"suppressOutput\":true}'; fi",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
