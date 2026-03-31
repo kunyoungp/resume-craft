@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Creative Template</title>
+<style>
+  /* === Reset & Base === */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html {
+    font-size: 14px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.5;
+    max-width: 794px;
+    margin: 0 auto;
+    background: #fff;
+    display: flex;
+    min-height: 1123px; /* A4 height at 96dpi */
+  }
+
+  /* === Sidebar (Left ~30%) === */
+  .sidebar {
+    width: 30%;
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 36px 22px 30px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-photo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #4a5568;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    color: #a0aec0;
+    font-weight: 700;
+  }
+
+  .sidebar h3 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #e53e3e;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #4a5568;
+  }
+
+  .sidebar-section { margin-bottom: 24px; }
+
+  /* === Sidebar: Contact === */
+  /* {{basics.email}}, {{basics.phone}}, {{basics.url}} */
+  /* {{basics.location.city}}, {{basics.location.region}} */
+  /* {{basics.profiles}} — array of {network, url, username} */
+  .contact-list {
+    list-style: none;
+  }
+
+  .contact-list li {
+    font-size: 12px;
+    margin-bottom: 6px;
+    line-height: 1.5;
+    color: #cbd5e0;
+    word-break: break-word;
+  }
+
+  .contact-list li strong {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #a0aec0;
+    margin-bottom: 1px;
+  }
+
+  .contact-list a {
+    color: #cbd5e0;
+    text-decoration: none;
+  }
+
+  .contact-list a:hover { color: #fff; }
+
+  /* === Sidebar: Skills === */
+  /* {{skills}} — array of {name, level, keywords[]} */
+  .skill-category { margin-bottom: 12px; }
+  .skill-category:last-child { margin-bottom: 0; }
+
+  .skill-category-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #e2e8f0;
+    margin-bottom: 6px;
+  }
+
+  .skill-bar-group { margin-bottom: 5px; }
+
+  .skill-bar-label {
+    font-size: 11px;
+    color: #a0aec0;
+    margin-bottom: 2px;
+  }
+
+  .skill-bar {
+    height: 5px;
+    background: #4a5568;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .skill-bar-fill {
+    height: 100%;
+    background: #e53e3e;
+    border-radius: 3px;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    list-style: none;
+  }
+
+  .skill-tags li {
+    font-size: 10.5px;
+    color: #cbd5e0;
+    background: #4a5568;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* === Sidebar: Languages === */
+  .lang-list {
+    list-style: none;
+  }
+
+  .lang-list li {
+    font-size: 12px;
+    color: #cbd5e0;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .lang-level {
+    font-size: 11px;
+    color: #a0aec0;
+  }
+
+  /* === Sidebar: Interests === */
+  .interest-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    list-style: none;
+  }
+
+  .interest-tags li {
+    font-size: 11px;
+    color: #cbd5e0;
+    background: #4a5568;
+    padding: 3px 10px;
+    border-radius: 12px;
+  }
+
+  /* === Main Content (Right ~70%) === */
+  .main {
+    width: 70%;
+    padding: 36px 32px 30px;
+  }
+
+  /* === Main: Name & Title === */
+  /* {{basics.name}} */
+  .main-header { margin-bottom: 20px; }
+
+  .main-header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    color: #1a202c;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+  }
+
+  .main-header .job-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #e53e3e;
+    margin-top: 2px;
+  }
+
+  /* === Main: Summary === */
+  /* {{basics.summary}} */
+  .main-summary {
+    font-size: 13px;
+    color: #4a5568;
+    line-height: 1.65;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  /* === Main: Sections === */
+  .main-section { margin-bottom: 22px; }
+
+  .main-section h2 {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #e53e3e;
+    margin-bottom: 12px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #e53e3e;
+    display: inline-block;
+  }
+
+  .main-section .section-content { clear: both; }
+
+  /* === Main: Experience === */
+  /* {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} */
+  .entry { margin-bottom: 16px; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .entry-position {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a202c;
+  }
+
+  .entry-dates {
+    font-size: 11px;
+    color: #718096;
+    white-space: nowrap;
+  }
+
+  .entry-company {
+    font-size: 13px;
+    color: #e53e3e;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+
+  .entry ul {
+    margin-top: 4px;
+    padding-left: 16px;
+  }
+
+  .entry ul li {
+    font-size: 12.5px;
+    color: #4a5568;
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+
+  /* === Main: Education === */
+  /* {{education}} — array of {institution, area, studyType, startDate, endDate, score} */
+  .edu-entry { margin-bottom: 10px; }
+  .edu-entry:last-child { margin-bottom: 0; }
+
+  .edu-degree {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a202c;
+  }
+
+  .edu-school {
+    font-size: 12px;
+    color: #718096;
+  }
+
+  .edu-dates {
+    font-size: 11px;
+    color: #a0aec0;
+  }
+
+  /* === Main: Projects === */
+  /* {{projects}} — array of {name, description, highlights[], url} */
+  .project { margin-bottom: 10px; }
+  .project:last-child { margin-bottom: 0; }
+
+  .project-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #1a202c;
+  }
+
+  .project-name a {
+    color: #e53e3e;
+    text-decoration: none;
+  }
+
+  .project-name a:hover { text-decoration: underline; }
+
+  .project-desc {
+    font-size: 12px;
+    color: #4a5568;
+    margin-top: 2px;
+  }
+
+  /* === Print === */
+  @media print {
+    html { font-size: 13px; }
+    body { max-width: none; min-height: auto; }
+    .no-print { display: none !important; }
+    a { color: inherit; text-decoration: none; }
+    .sidebar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .entry { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== SIDEBAR ===================== -->
+<aside class="sidebar">
+
+  <!-- Photo placeholder -->
+  <div class="sidebar-photo">RM</div>
+
+  <!-- === Contact === -->
+  <!-- {{basics.email}}, {{basics.phone}}, {{basics.url}} -->
+  <!-- {{basics.location.city}}, {{basics.location.region}} -->
+  <!-- {{basics.profiles}} — array of {network, url, username} -->
+  <div class="sidebar-section">
+    <h3>Contact</h3>
+    <ul class="contact-list">
+      <li><strong>Email</strong> rachel.martinez@email.com</li>
+      <li><strong>Phone</strong> +1 (555) 678-9012</li>
+      <li><strong>Location</strong> Los Angeles, CA</li>
+      <li><strong>Portfolio</strong> <a href="https://rachelmartinez.design">rachelmartinez.design</a></li>
+      <li><strong>Dribbble</strong> <a href="https://dribbble.com/rachelmdesign">dribbble.com/rachelmdesign</a></li>
+      <li><strong>LinkedIn</strong> <a href="https://linkedin.com/in/rachelmartinez">linkedin.com/in/rachelmartinez</a></li>
+    </ul>
+  </div>
+
+  <!-- === Skills === -->
+  <!-- {{skills}} — array of {name, level, keywords[]} -->
+  <div class="sidebar-section">
+    <h3>Skills</h3>
+
+    <div class="skill-category">
+      <div class="skill-category-name">Design</div>
+      <div class="skill-bar-group">
+        <div class="skill-bar-label">UI/UX Design</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width: 95%"></div></div>
+      </div>
+      <div class="skill-bar-group">
+        <div class="skill-bar-label">Brand Identity</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width: 90%"></div></div>
+      </div>
+      <div class="skill-bar-group">
+        <div class="skill-bar-label">Motion Design</div>
+        <div class="skill-bar"><div class="skill-bar-fill" style="width: 80%"></div></div>
+      </div>
+    </div>
+
+    <div class="skill-category">
+      <div class="skill-category-name">Tools</div>
+      <ul class="skill-tags">
+        <li>Figma</li>
+        <li>Sketch</li>
+        <li>Adobe CC</li>
+        <li>After Effects</li>
+        <li>Framer</li>
+        <li>Webflow</li>
+      </ul>
+    </div>
+
+    <div class="skill-category">
+      <div class="skill-category-name">Code</div>
+      <ul class="skill-tags">
+        <li>HTML/CSS</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Tailwind</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- === Languages === -->
+  <div class="sidebar-section">
+    <h3>Languages</h3>
+    <ul class="lang-list">
+      <li><span>English</span> <span class="lang-level">Native</span></li>
+      <li><span>Spanish</span> <span class="lang-level">Fluent</span></li>
+      <li><span>Portuguese</span> <span class="lang-level">Conversational</span></li>
+    </ul>
+  </div>
+
+  <!-- === Interests === -->
+  <div class="sidebar-section">
+    <h3>Interests</h3>
+    <ul class="interest-tags">
+      <li>Typography</li>
+      <li>Photography</li>
+      <li>Generative Art</li>
+      <li>Hiking</li>
+      <li>Film</li>
+    </ul>
+  </div>
+
+</aside>
+
+<!-- ===================== MAIN CONTENT ===================== -->
+<main class="main">
+
+  <!-- === Name & Title === -->
+  <!-- {{basics.name}} -->
+  <div class="main-header">
+    <h1>Rachel Martinez</h1>
+    <div class="job-title">Senior Product Designer</div>
+  </div>
+
+  <!-- === Summary === -->
+  <!-- {{basics.summary}} -->
+  <p class="main-summary">Creative product designer with 6+ years of experience crafting intuitive digital experiences for consumer and B2B products. Passionate about bridging the gap between user needs and business goals through research-driven design, rapid prototyping, and close collaboration with engineering teams.</p>
+
+  <!-- === Experience === -->
+  <!-- {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} -->
+  <div class="main-section">
+    <h2>Experience</h2>
+    <div class="section-content">
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-position">Senior Product Designer</div>
+          <div class="entry-dates">Feb 2022 — Present</div>
+        </div>
+        <div class="entry-company">Spotify</div>
+        <ul>
+          <li>Led redesign of the Discover Weekly experience, increasing user engagement by 22%</li>
+          <li>Established design system components used by 40+ designers across 8 product teams</li>
+          <li>Conducted user research sessions and usability testing with 100+ participants quarterly</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-position">Product Designer</div>
+          <div class="entry-dates">Jun 2019 — Jan 2022</div>
+        </div>
+        <div class="entry-company">Figma</div>
+        <ul>
+          <li>Designed key features for the collaborative design platform used by 4M+ designers</li>
+          <li>Shipped the auto-layout V2 feature, one of the most requested community improvements</li>
+          <li>Created motion design specifications for interactive prototyping transitions</li>
+        </ul>
+      </div>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div class="entry-position">UI/UX Designer</div>
+          <div class="entry-dates">Aug 2017 — May 2019</div>
+        </div>
+        <div class="entry-company">IDEO</div>
+        <ul>
+          <li>Delivered end-to-end design solutions for 8 client projects in healthcare and fintech</li>
+          <li>Facilitated design thinking workshops with cross-functional stakeholder groups</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- === Education === -->
+  <!-- {{education}} — array of {institution, area, studyType, startDate, endDate, score} -->
+  <div class="main-section">
+    <h2>Education</h2>
+    <div class="section-content">
+      <div class="edu-entry">
+        <div class="edu-degree">BFA, Graphic Design</div>
+        <div class="edu-school">Rhode Island School of Design (RISD)</div>
+        <div class="edu-dates">2013 — 2017</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- === Projects === -->
+  <!-- {{projects}} — array of {name, description, highlights[], url} -->
+  <div class="main-section">
+    <h2>Projects</h2>
+    <div class="section-content">
+      <div class="project">
+        <div class="project-name"><a href="https://rachelmartinez.design/designsys">SpectraUI</a></div>
+        <p class="project-desc">Open-source design system with 60+ components, Figma library, and React implementation. Used by 200+ teams.</p>
+      </div>
+      <div class="project">
+        <div class="project-name"><a href="https://rachelmartinez.design/typecraft">TypeCraft</a></div>
+        <p class="project-desc">Interactive typography exploration tool built with WebGL. Featured on Awwwards Site of the Day.</p>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+</body>
+</html>

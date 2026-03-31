@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Modern Template</title>
+<style>
+  /* === Reset & Base === */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html {
+    font-size: 14px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1f2937;
+    line-height: 1.5;
+    max-width: 794px;
+    margin: 0 auto;
+    background: #fff;
+  }
+
+  /* === Header with Teal Accent === */
+  /* {{basics.name}}, {{basics.email}}, {{basics.phone}}, {{basics.url}} */
+  /* {{basics.location.city}}, {{basics.location.region}} */
+  /* {{basics.profiles}} — array of {network, url, username} */
+  /* {{basics.summary}} */
+  .header {
+    background: #0891b2;
+    color: #fff;
+    padding: 36px 40px 28px;
+  }
+
+  .header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+  }
+
+  .header .subtitle {
+    font-size: 16px;
+    font-weight: 400;
+    opacity: 0.9;
+    margin-bottom: 14px;
+  }
+
+  .header .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 18px;
+    font-size: 13px;
+    opacity: 0.92;
+    margin-bottom: 16px;
+  }
+
+  .header .contact-row a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .header .contact-row a:hover { text-decoration: underline; }
+
+  .header .summary {
+    font-size: 13.5px;
+    line-height: 1.6;
+    opacity: 0.93;
+    max-width: 640px;
+  }
+
+  /* === Main Content === */
+  .content {
+    padding: 24px 40px 36px;
+  }
+
+  /* === Section === */
+  section {
+    margin-bottom: 22px;
+  }
+
+  section h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0891b2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid #0891b2;
+  }
+
+  /* === Skills === */
+  /* {{skills}} — array of {name, level, keywords[]} */
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .skills-grid li {
+    background: #ecfeff;
+    color: #0e7490;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid #cffafe;
+  }
+
+  /* === Experience === */
+  /* {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} */
+  .entry { margin-bottom: 16px; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .entry-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .entry-company {
+    font-weight: 500;
+    color: #0891b2;
+  }
+
+  .entry-dates {
+    font-size: 12px;
+    color: #6b7280;
+    white-space: nowrap;
+  }
+
+  .entry-summary {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 2px;
+    font-style: italic;
+  }
+
+  .entry ul {
+    margin-top: 4px;
+    padding-left: 18px;
+  }
+
+  .entry ul li {
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+
+  /* === Education === */
+  /* {{education}} — array of {institution, area, studyType, startDate, endDate, score} */
+  .edu-entry { margin-bottom: 10px; }
+  .edu-entry:last-child { margin-bottom: 0; }
+
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .edu-degree {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .edu-school {
+    font-size: 13px;
+    color: #4b5563;
+  }
+
+  .edu-dates {
+    font-size: 12px;
+    color: #6b7280;
+  }
+
+  /* === Projects === */
+  /* {{projects}} — array of {name, description, highlights[], url} */
+  .project { margin-bottom: 12px; }
+  .project:last-child { margin-bottom: 0; }
+
+  .project-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #111827;
+  }
+
+  .project-name a {
+    color: #0891b2;
+    text-decoration: none;
+  }
+
+  .project-name a:hover { text-decoration: underline; }
+
+  .project-desc {
+    font-size: 13px;
+    color: #4b5563;
+    margin-top: 2px;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 4px;
+    list-style: none;
+  }
+
+  .project-tech li {
+    font-size: 11px;
+    color: #6b7280;
+    background: #f3f4f6;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  /* === Print === */
+  @media print {
+    html { font-size: 13px; }
+    body { max-width: none; }
+    .no-print { display: none !important; }
+    a { color: inherit; text-decoration: none; }
+    section { break-inside: avoid; }
+    .entry { break-inside: avoid; }
+    .header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<!-- {{basics.name}}, {{basics.email}}, {{basics.phone}}, {{basics.url}} -->
+<!-- {{basics.location.city}}, {{basics.location.region}} -->
+<!-- {{basics.profiles}} — array of {network, url, username} -->
+<!-- {{basics.summary}} -->
+<header class="header">
+  <h1>Alex Chen</h1>
+  <div class="subtitle">Full-Stack Developer</div>
+  <div class="contact-row">
+    <span>alex.chen@email.com</span>
+    <span>+1 (555) 234-5678</span>
+    <span>Austin, TX</span>
+    <span><a href="https://alexchen.io">alexchen.io</a></span>
+    <span><a href="https://github.com/alexchen">github.com/alexchen</a></span>
+    <span><a href="https://linkedin.com/in/alexchen">linkedin.com/in/alexchen</a></span>
+  </div>
+  <div class="summary">
+    Versatile full-stack developer with 5 years of experience building modern web applications from concept to deployment. Thrives in fast-paced startup environments with a focus on rapid iteration, clean code, and user-centric design. Experienced with both frontend and backend technologies across the JavaScript ecosystem.
+  </div>
+</header>
+
+<div class="content">
+
+  <!-- ===================== SKILLS ===================== -->
+  <!-- {{skills}} — array of {name, level, keywords[]} -->
+  <section>
+    <h2>Skills</h2>
+    <ul class="skills-grid">
+      <li>JavaScript / TypeScript</li>
+      <li>React / Next.js</li>
+      <li>Node.js / Express</li>
+      <li>Python / FastAPI</li>
+      <li>PostgreSQL</li>
+      <li>MongoDB</li>
+      <li>AWS / Vercel</li>
+      <li>Docker</li>
+      <li>Tailwind CSS</li>
+      <li>GraphQL</li>
+      <li>Redis</li>
+      <li>Figma</li>
+    </ul>
+  </section>
+
+  <!-- ===================== EXPERIENCE ===================== -->
+  <!-- {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} -->
+  <section>
+    <h2>Experience</h2>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Full-Stack Developer <span class="entry-company">at Vercel</span></div>
+        <div class="entry-dates">Mar 2022 — Present</div>
+      </div>
+      <ul>
+        <li>Built core features for the deployment platform used by 500K+ developers worldwide</li>
+        <li>Designed and shipped the new analytics dashboard, increasing user engagement by 28%</li>
+        <li>Optimized serverless function cold starts by 60% through runtime caching improvements</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Frontend Engineer <span class="entry-company">at Notion</span></div>
+        <div class="entry-dates">Jul 2020 — Feb 2022</div>
+      </div>
+      <ul>
+        <li>Developed the collaborative editing engine supporting real-time updates for 30M+ users</li>
+        <li>Reduced bundle size by 35% through code splitting and lazy loading strategies</li>
+        <li>Created reusable component library adopted across 6 product teams</li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <div class="entry-header">
+        <div class="entry-title">Junior Developer <span class="entry-company">at TechStart</span></div>
+        <div class="entry-dates">Jun 2019 — Jun 2020</div>
+      </div>
+      <ul>
+        <li>Shipped 3 customer-facing features from design to production in an agile startup team of 8</li>
+        <li>Built RESTful APIs and integrated third-party payment and notification services</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ===================== EDUCATION ===================== -->
+  <!-- {{education}} — array of {institution, area, studyType, startDate, endDate, score} -->
+  <section>
+    <h2>Education</h2>
+    <div class="edu-entry">
+      <div class="edu-header">
+        <div>
+          <div class="edu-degree">B.S. Computer Science</div>
+          <div class="edu-school">University of Texas at Austin</div>
+        </div>
+        <div class="edu-dates">Aug 2015 — May 2019</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROJECTS ===================== -->
+  <!-- {{projects}} — array of {name, description, highlights[], url} -->
+  <section>
+    <h2>Projects</h2>
+
+    <div class="project">
+      <div class="project-name"><a href="https://github.com/alexchen/quickdeploy">QuickDeploy</a></div>
+      <p class="project-desc">CLI tool for zero-config deployment of static sites and serverless functions. 800+ npm weekly downloads.</p>
+      <ul class="project-tech">
+        <li>Node.js</li>
+        <li>AWS Lambda</li>
+        <li>CloudFront</li>
+      </ul>
+    </div>
+
+    <div class="project">
+      <div class="project-name"><a href="https://github.com/alexchen/collabboard">CollabBoard</a></div>
+      <p class="project-desc">Real-time collaborative whiteboard app with WebSocket sync, infinite canvas, and export to PNG/SVG.</p>
+      <ul class="project-tech">
+        <li>React</li>
+        <li>Socket.io</li>
+        <li>Canvas API</li>
+      </ul>
+    </div>
+  </section>
+
+</div>
+
+</body>
+</html>

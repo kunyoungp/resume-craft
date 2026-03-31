@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume — Minimal Template</title>
+<style>
+  /* === Reset & Base === */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  @page {
+    size: A4;
+    margin: 15mm 20mm;
+  }
+
+  html {
+    font-size: 14px;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.5;
+    max-width: 794px;
+    margin: 0 auto;
+    padding: 40px 32px;
+    background: #fff;
+  }
+
+  /* === Header / Contact === */
+  /* {{basics.name}}, {{basics.email}}, {{basics.phone}}, {{basics.url}}, {{basics.location.city}}, {{basics.location.region}} */
+  .header { margin-bottom: 24px; }
+
+  .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+    color: #666;
+  }
+
+  .contact-row span::before {
+    content: "";
+  }
+
+  .contact-row a {
+    color: #666;
+    text-decoration: none;
+  }
+
+  .contact-row a:hover { text-decoration: underline; }
+
+  /* === Section Dividers === */
+  section {
+    padding: 16px 0;
+    border-top: 1px solid #e0e0e0;
+  }
+
+  section:first-of-type { border-top: none; }
+
+  section h2 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #666;
+    margin-bottom: 12px;
+  }
+
+  /* === Summary === */
+  /* {{basics.summary}} */
+  .summary p {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.6;
+  }
+
+  /* === Skills === */
+  /* {{skills}} — array of {name, level, keywords[]} */
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    list-style: none;
+  }
+
+  .skills-list li {
+    background: #f3f4f6;
+    color: #374151;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  /* === Experience === */
+  /* {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} */
+  .entry { margin-bottom: 16px; }
+  .entry:last-child { margin-bottom: 0; }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .entry-title {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .entry-company {
+    font-weight: 400;
+    color: #444;
+  }
+
+  .entry-dates {
+    font-size: 12px;
+    color: #666;
+    white-space: nowrap;
+  }
+
+  .entry-summary {
+    font-size: 13px;
+    color: #444;
+    margin-top: 4px;
+  }
+
+  .entry ul {
+    margin-top: 4px;
+    padding-left: 18px;
+  }
+
+  .entry ul li {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+
+  /* === Education === */
+  /* {{education}} — array of {institution, area, studyType, startDate, endDate, score} */
+  .edu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .edu-degree {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .edu-school {
+    font-size: 13px;
+    color: #444;
+  }
+
+  .edu-dates {
+    font-size: 12px;
+    color: #666;
+  }
+
+  /* === Projects === */
+  /* {{projects}} — array of {name, description, highlights[], url, startDate, endDate} */
+  .project-name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .project-name a {
+    color: #1a1a1a;
+    text-decoration: none;
+  }
+
+  .project-name a:hover { text-decoration: underline; }
+
+  .project-desc {
+    font-size: 13px;
+    color: #444;
+    margin-top: 2px;
+  }
+
+  /* === Print === */
+  @media print {
+    html { font-size: 13px; }
+    body { padding: 0; max-width: none; }
+    .no-print { display: none !important; }
+    a { color: inherit; text-decoration: none; }
+    section { break-inside: avoid; }
+    .entry { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== HEADER ===================== -->
+<!-- {{basics.name}}, {{basics.email}}, {{basics.phone}}, {{basics.url}} -->
+<!-- {{basics.location.city}}, {{basics.location.region}} -->
+<!-- {{basics.profiles}} — array of {network, url, username} -->
+<header class="header">
+  <h1>Jane Smith</h1>
+  <div class="contact-row">
+    <span>jane.smith@email.com</span>
+    <span>+1 (555) 123-4567</span>
+    <span>San Francisco, CA</span>
+    <span><a href="https://janesmith.dev">janesmith.dev</a></span>
+    <span><a href="https://github.com/janesmith">github.com/janesmith</a></span>
+    <span><a href="https://linkedin.com/in/janesmith">linkedin.com/in/janesmith</a></span>
+  </div>
+</header>
+
+<!-- ===================== SUMMARY ===================== -->
+<!-- {{basics.summary}} -->
+<section class="summary">
+  <h2>Summary</h2>
+  <p>Senior Software Engineer with 8+ years of experience building scalable web applications and distributed systems. Passionate about clean architecture, developer tooling, and mentoring junior engineers. Proven track record of leading cross-functional teams to deliver high-impact products on time.</p>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<!-- {{skills}} — array of {name, level, keywords[]} -->
+<section>
+  <h2>Skills</h2>
+  <ul class="skills-list">
+    <li>TypeScript</li>
+    <li>React</li>
+    <li>Node.js</li>
+    <li>Python</li>
+    <li>PostgreSQL</li>
+    <li>AWS</li>
+    <li>Docker</li>
+    <li>Kubernetes</li>
+    <li>GraphQL</li>
+    <li>CI/CD</li>
+    <li>System Design</li>
+    <li>REST APIs</li>
+    <li>Redis</li>
+    <li>Git</li>
+  </ul>
+</section>
+
+<!-- ===================== EXPERIENCE ===================== -->
+<!-- {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} -->
+<section>
+  <h2>Experience</h2>
+
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-title">Senior Software Engineer <span class="entry-company">· Stripe</span></div>
+      <div class="entry-dates">Jan 2021 — Present</div>
+    </div>
+    <ul>
+      <li>Led the redesign of the payment processing pipeline, reducing latency by 40% and handling 2M+ daily transactions</li>
+      <li>Architected a real-time fraud detection microservice using event-driven patterns and Kafka</li>
+      <li>Mentored 4 junior engineers through structured code reviews and pair programming sessions</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-title">Software Engineer <span class="entry-company">· Airbnb</span></div>
+      <div class="entry-dates">Jun 2018 — Dec 2020</div>
+    </div>
+    <ul>
+      <li>Built and maintained core booking service handling 500K+ reservations per day across 30 markets</li>
+      <li>Implemented server-side rendering for the search results page, improving LCP by 35%</li>
+      <li>Designed A/B testing framework adopted by 12 product teams for experimentation workflows</li>
+    </ul>
+  </div>
+
+  <div class="entry">
+    <div class="entry-header">
+      <div class="entry-title">Software Engineer Intern <span class="entry-company">· Google</span></div>
+      <div class="entry-dates">May 2017 — Aug 2017</div>
+    </div>
+    <ul>
+      <li>Developed an internal dashboard for monitoring ML model performance metrics in real time</li>
+      <li>Contributed to open-source TensorFlow tooling with 200+ GitHub stars</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ===================== EDUCATION ===================== -->
+<!-- {{education}} — array of {institution, area, studyType, startDate, endDate, score} -->
+<section>
+  <h2>Education</h2>
+
+  <div class="entry">
+    <div class="edu-header">
+      <div>
+        <div class="edu-degree">B.S. Computer Science</div>
+        <div class="edu-school">Stanford University</div>
+      </div>
+      <div class="edu-dates">Sep 2014 — Jun 2018</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<!-- {{projects}} — array of {name, description, highlights[], url, startDate, endDate} -->
+<section>
+  <h2>Projects</h2>
+
+  <div class="entry">
+    <div class="project-name"><a href="https://github.com/janesmith/fastql">FastQL</a></div>
+    <p class="project-desc">High-performance GraphQL gateway in Rust. Handles 50K req/s with sub-millisecond overhead. Used by 3 production teams internally.</p>
+  </div>
+
+  <div class="entry">
+    <div class="project-name"><a href="https://github.com/janesmith/devmetrics">DevMetrics</a></div>
+    <p class="project-desc">Open-source developer productivity dashboard aggregating Git, CI, and code review data. 1.2K GitHub stars.</p>
+  </div>
+</section>
+
+</body>
+</html>
