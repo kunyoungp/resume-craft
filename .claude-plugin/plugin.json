@@ -1,0 +1,10 @@
+{
+  "name": "resume-craft",
+  "version": "0.1.0",
+  "description": "Generate custom, ATS-optimized resumes and cover letters tailored to job descriptions",
+  "author": {
+    "name": "kunyoung.park"
+  },
+  "license": "MIT",
+  "keywords": ["resume", "cover-letter", "job-application", "ats", "career"]
+}
