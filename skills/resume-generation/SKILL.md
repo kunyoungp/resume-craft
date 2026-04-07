@@ -79,10 +79,11 @@ Cut older or less relevant roles to meet the limit. Prioritize recent experience
 
 ### Professional Summary Guidelines
 
-Write the professional summary as 2-3 sentences. Tailor it to every specific application — never use a generic summary. Lead with the candidate's specialty and years of experience, then highlight the most relevant achievement or skill area for the target role. Pack the most critical JD keywords into this section because ATS systems weight it highest.
+Write the professional summary as 1-2 sentences that capture the candidate's general professional identity. Lead with the candidate's specialty, core tech stack, and years of experience. Mention the broad domain or skill area most relevant to the target role. Do NOT include specific company names, metrics, or achievements — those belong in the work experience section. Pack the most critical JD keywords into this section because ATS systems weight it highest.
 
 BAD: "Results-driven professional with a track record of success in leveraging innovative solutions."
-GOOD: "Backend engineer with 6 years building distributed systems in Go and Python. Reduced API latency by 40% at Acme Corp by redesigning the caching layer, serving 10M+ daily requests."
+BAD: "Backend engineer who reduced API latency by 40% at Acme Corp by redesigning the caching layer, serving 10M+ daily requests." (too specific — this is a work experience bullet, not a summary)
+GOOD: "Backend engineer with 6 years of experience building high-traffic distributed systems in Go and Python, specializing in API design and performance optimization."
 
 ---
 

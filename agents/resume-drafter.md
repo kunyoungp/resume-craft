@@ -66,7 +66,7 @@ The orchestrating command provides a confirmed output language (detected from th
 - Mirror exact keywords from the JD — if the JD says "stakeholder management", use that phrase
 - Tailor the professional summary specifically for this role and company
 - **Match-driven content ordering:**
-  - Professional summary: Lead with the 2-3 strongest matching skills/achievements. The summary is the first thing both ATS and humans read — front-load it with the highest-relevance content.
+  - Professional summary: Lead with the candidate's specialty, experience level, and core tech stack. Mention the broad skill areas that match the JD, but do NOT include specific achievements, metrics, or company names — those go in work experience bullets. The summary defines WHO the candidate is, not WHAT they accomplished at a specific job.
   - Work experience bullets: For each role, order bullets so that those demonstrating strong-match skills come first. If a role has 4 bullets, the first 2 should directly address JD requirements.
   - Skills section: List matching skills first within each category, before non-matching skills.
 - **User-clarified gap handling:** When the user provided related experience during gap clarification, incorporate it into the relevant work experience section. Frame it using transferable language — e.g., if the JD requires Kubernetes and the user clarified they have Docker Swarm experience, write a bullet highlighting container orchestration skills and mention Docker Swarm specifically. Do NOT claim experience with the skill they lack; frame what they DO have as relevant.
