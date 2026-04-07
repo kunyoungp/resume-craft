@@ -1,0 +1,11 @@
+{
+  "plugins": {
+    "resume-craft": {
+      "description": "Generate ATS-optimized resumes and cover letters tailored to job descriptions",
+      "source": {
+        "source": "github",
+        "repo": "kunyoungp/resume-craft"
+      }
+    }
+  }
+}
