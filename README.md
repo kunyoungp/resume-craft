@@ -96,6 +96,78 @@ The entire pipeline runs automatically from a single command:
 5. Opens browser preview and exports PDF
 6. Ready for edits if you want changes
 
+## End-to-End Flow
+
+The following diagram shows how the full pipeline works when you run `/resume`:
+
+```
+┌─────────────────┐
+│  1. Build       │  /resume-profile
+│     Profile     │  Guided Q&A → profile.json (JSON Resume schema)
+│                 │  Collects: work history, skills, education,
+│                 │  cover letter tone & personal stories
+└────────┬────────┘
+         │ profile.json + cover-letter-profile.json
+         ▼
+┌─────────────────┐
+│  2. Get Job     │  URL → scrape-job.mjs → plain text
+│     Description │  or paste text directly
+└────────┬────────┘
+         │ raw JD text
+         ▼
+┌─────────────────┐
+│  3. Job         │  job-analysis skill
+│     Analysis    │  Extracts: role basics, required/preferred skills,
+│                 │  responsibilities, ATS keywords (top 20),
+│                 │  culture signals, industry classification,
+│                 │  language detection, experience level
+└────────┬────────┘
+         │ structured JD analysis
+         ▼
+┌─────────────────┐
+│  4. Match &     │  Compare profile vs JD requirements
+│     Confirm     │  • Language: auto-detect or ask if ambiguous
+│                 │  • Template: auto-select by industry or use saved pref
+│                 │  • Gap analysis: classify major/minor gaps
+│                 │  • Strong match → proceed automatically
+│                 │  • Moderate/Weak → ask about gaps in one batch
+└────────┬────────┘
+         │ confirmed language + template + gap clarifications
+         ▼
+┌─────────────────┐
+│  5. Generate    │  resume-drafter agent + resume-generation skill
+│     Resume &    │  Resume: profile data → template HTML, tailored bullets,
+│     Cover Letter│  65-75% keyword match, AI-avoidance rules
+│                 │  Cover letter: problem-solution format, 250-400 words,
+│                 │  specific hooks + achievement stories
+└────────┬────────┘
+         │ resume.html + cover-letter.html
+         ▼
+┌─────────────────┐
+│  6. Verify &    │  resume-verifier agent + verification skill
+│     Auto-Fix    │  Phase 1: Factual accuracy (cross-ref profile.json)
+│                 │  Phase 2: AI-detection scan (banned words, rhythm)
+│                 │  Phase 3: Professional quality (bullets, keywords,
+│                 │           section order, length)
+│                 │  Auto-fix issues → re-verify → only pause if unfixable
+└────────┬────────┘
+         │ verified documents
+         ▼
+┌─────────────────┐
+│  7. Deliver     │  Browser preview via preview.mjs
+│                 │  PDF export via export-pdf.mjs (Playwright)
+│                 │  Edit loop: user requests changes → re-generate →
+│                 │  re-verify → re-export until satisfied
+└─────────────────┘
+```
+
+### Key design decisions
+
+- **Minimal interruptions** — the pipeline auto-proceeds on obvious defaults and only pauses for genuine ambiguity (skill gaps, mixed-language JDs)
+- **Gap clarification is batched** — all major gaps are presented in a single question, not one-by-one
+- **Verification is silent on success** — auto-fixes banned words, sentence rhythm, and keyword density without showing a report unless issues require user judgment
+- **Cover letter is always generated** — users can simply ignore the file if they don't need it
+
 ## Templates
 
 | Template | Best For | Style |
