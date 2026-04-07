@@ -38,6 +38,14 @@ Check every single claim in the document against the profile:
 
 **Certifications** — Every certification mentioned must appear in the profile. Do not invent certifications.
 
+### User-Clarified Experience
+
+During the gap clarification step (Step 2d), the user may have provided additional experience that is NOT in `profile.json` — for example, side projects, informal exposure, or transferable skills described verbally. This experience was confirmed directly by the user and should be treated as verified data.
+
+When auditing, if a claim in the resume traces back to user-clarified experience from the gap clarification step (rather than profile.json), do NOT flag it as "UNVERIFIED." These are legitimate, user-confirmed facts. They will typically appear as transferable-skill bullets framed around related (not identical) experience.
+
+If you cannot determine whether a claim came from user clarification or was fabricated, flag it as "UNVERIFIED — confirm if this was provided during gap clarification."
+
 ### Flagging
 
 Flag any claim that cannot be traced to the profile as **"UNVERIFIED"**. Provide the exact text, its location in the document, and what the profile actually says (or that the profile has no corresponding data).

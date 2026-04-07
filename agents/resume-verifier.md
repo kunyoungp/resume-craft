@@ -22,6 +22,7 @@ description: Use this agent when a resume or cover letter has been drafted and n
 
 model: inherit
 color: yellow
+mode: bypassPermissions
 tools: ["Read", "Grep", "Glob"]
 ---
 
@@ -43,6 +44,7 @@ Verify that a drafted resume and/or cover letter is factually accurate, sounds a
   - Skills mentioned must appear in the profile's skills section
   - Education details must match
 - Flag ANY claim not traceable to the profile as "UNVERIFIED — [reason]"
+- **Exception:** Claims based on user-clarified experience from the gap clarification step (Step 2d) should NOT be flagged as UNVERIFIED. These are user-confirmed facts provided during the session that may not appear in profile.json. They typically appear as transferable-skill bullets. If uncertain whether a claim came from user clarification, flag as "UNVERIFIED — confirm if provided during gap clarification."
 - Zero tolerance for hallucinated achievements
 
 **Phase 2: AI-Detection Scan**

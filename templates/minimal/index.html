@@ -4,108 +4,139 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resume — Minimal Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
+  /* === CSS Custom Properties === */
+  :root {
+    --primary: #000000;
+    --primary-light: #f5f5f5;
+    --accent: #ef4444;
+    --text: #1a1a1a;
+    --text-muted: #6b7280;
+    --surface: #ffffff;
+    --border: #e5e5e5;
+  }
+
   /* === Reset & Base === */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   @page {
     size: A4;
-    margin: 15mm 20mm;
+    margin: 0;
   }
 
   html {
-    font-size: 14px;
+    font-size: 13px;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #1a1a1a;
-    line-height: 1.5;
+    font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text);
+    line-height: 1.6;
     max-width: 794px;
     margin: 0 auto;
-    padding: 40px 32px;
-    background: #fff;
+    padding: 56px 48px 48px 48px;
+    background: var(--surface);
+  }
+
+  /* Red vertical bar — left edge of page */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    z-index: 100;
   }
 
   /* === Header / Contact === */
   /* {{basics.name}}, {{basics.email}}, {{basics.phone}}, {{basics.url}}, {{basics.location.city}}, {{basics.location.region}} */
-  .header { margin-bottom: 24px; }
+  .header {
+    margin-bottom: 40px;
+  }
 
   .header h1 {
-    font-size: 28px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 52px;
     font-weight: 700;
-    letter-spacing: -0.5px;
-    line-height: 1.2;
-    margin-bottom: 8px;
+    letter-spacing: -2px;
+    line-height: 1.05;
+    color: var(--primary);
+    margin-bottom: 16px;
   }
 
   .contact-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 16px;
-    font-size: 13px;
-    color: #666;
-  }
-
-  .contact-row span::before {
-    content: "";
+    gap: 4px 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.2px;
   }
 
   .contact-row a {
-    color: #666;
+    color: var(--text-muted);
     text-decoration: none;
   }
 
   .contact-row a:hover { text-decoration: underline; }
 
-  /* === Section Dividers === */
+  /* === Section Structure === */
   section {
-    padding: 16px 0;
-    border-top: 1px solid #e0e0e0;
+    padding: 28px 0;
+    border-top: 0.5px solid var(--border);
   }
 
-  section:first-of-type { border-top: none; }
+  section:first-of-type {
+    border-top: 0.5px solid var(--border);
+  }
 
   section h2 {
-    font-size: 12px;
-    font-weight: 600;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #666;
-    margin-bottom: 12px;
+    letter-spacing: 4.5px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    transition: transform 0.2s ease;
   }
 
   /* === Summary === */
   /* {{basics.summary}} */
   .summary p {
-    font-size: 14px;
-    color: #333;
-    line-height: 1.6;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px;
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 620px;
   }
 
   /* === Skills === */
   /* {{skills}} — array of {name, level, keywords[]} */
-  .skills-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    list-style: none;
-  }
-
-  .skills-list li {
-    background: #f3f4f6;
-    color: #374151;
+  .skills-line {
+    font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 4px;
-    font-weight: 500;
+    color: var(--text);
+    line-height: 1.8;
+    letter-spacing: 0.2px;
   }
 
   /* === Experience === */
   /* {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} */
-  .entry { margin-bottom: 16px; }
+  .entry {
+    margin-bottom: 24px;
+    padding: 12px 0;
+    transition: background-color 0.15s ease;
+  }
+
   .entry:last-child { margin-bottom: 0; }
 
   .entry-header {
@@ -113,41 +144,66 @@
     justify-content: space-between;
     align-items: baseline;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 8px;
+    margin-bottom: 8px;
   }
 
   .entry-title {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: -0.3px;
   }
 
   .entry-company {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 400;
-    color: #444;
+    color: var(--text-muted);
   }
 
   .entry-dates {
-    font-size: 12px;
-    color: #666;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
     white-space: nowrap;
+    letter-spacing: 0.3px;
+    text-align: right;
   }
 
   .entry-summary {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 13px;
-    color: #444;
+    color: var(--text);
     margin-top: 4px;
+    line-height: 1.6;
   }
 
   .entry ul {
-    margin-top: 4px;
-    padding-left: 18px;
+    margin-top: 6px;
+    padding-left: 16px;
+    list-style: none;
   }
 
   .entry ul li {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 13px;
-    color: #444;
-    margin-bottom: 2px;
-    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.6;
+    position: relative;
+    padding-left: 12px;
+  }
+
+  .entry ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 3px;
+    height: 3px;
+    background: var(--text-muted);
+    border-radius: 0;
   }
 
   /* === Education === */
@@ -157,52 +213,108 @@
     justify-content: space-between;
     align-items: baseline;
     flex-wrap: wrap;
-    gap: 4px;
+    gap: 8px;
   }
 
   .edu-degree {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
+    color: var(--primary);
+    letter-spacing: -0.2px;
   }
 
   .edu-school {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 13px;
-    color: #444;
+    color: var(--text-muted);
+    margin-top: 2px;
   }
 
   .edu-dates {
-    font-size: 12px;
-    color: #666;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    letter-spacing: 0.3px;
   }
 
   /* === Projects === */
   /* {{projects}} — array of {name, description, highlights[], url, startDate, endDate} */
   .project-name {
+    font-family: 'Space Grotesk', sans-serif;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: -0.2px;
   }
 
   .project-name a {
-    color: #1a1a1a;
+    color: var(--primary);
     text-decoration: none;
   }
 
   .project-name a:hover { text-decoration: underline; }
 
   .project-desc {
+    font-family: 'IBM Plex Sans', sans-serif;
     font-size: 13px;
-    color: #444;
-    margin-top: 2px;
+    color: var(--text);
+    margin-top: 4px;
+    line-height: 1.6;
+  }
+
+  /* === Screen-only micro-interactions === */
+  @media screen {
+    section h2:hover {
+      transform: translateX(4px);
+    }
+
+    .entry:hover {
+      background-color: var(--primary-light);
+      margin-left: -8px;
+      margin-right: -8px;
+      padding-left: 8px;
+      padding-right: 8px;
+      border-radius: 2px;
+    }
   }
 
   /* === Print === */
   @media print {
-    html { font-size: 13px; }
-    body { padding: 0; max-width: none; }
+    html { font-size: 12px; }
+
+    body {
+      padding: 48px 44px;
+      max-width: none;
+    }
+
+    body::before {
+      position: absolute;
+    }
+
     .no-print { display: none !important; }
+
     a { color: inherit; text-decoration: none; }
+
     section { break-inside: avoid; }
     .entry { break-inside: avoid; }
+
+    /* Disable all transitions/animations */
+    *, *::before, *::after {
+      transition: none !important;
+      animation: none !important;
+    }
+
+    section h2:hover {
+      transform: none;
+    }
+
+    .entry:hover {
+      background-color: transparent;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
 </style>
 </head>
@@ -235,22 +347,7 @@
 <!-- {{skills}} — array of {name, level, keywords[]} -->
 <section>
   <h2>Skills</h2>
-  <ul class="skills-list">
-    <li>TypeScript</li>
-    <li>React</li>
-    <li>Node.js</li>
-    <li>Python</li>
-    <li>PostgreSQL</li>
-    <li>AWS</li>
-    <li>Docker</li>
-    <li>Kubernetes</li>
-    <li>GraphQL</li>
-    <li>CI/CD</li>
-    <li>System Design</li>
-    <li>REST APIs</li>
-    <li>Redis</li>
-    <li>Git</li>
-  </ul>
+  <p class="skills-line">TypeScript, React, Node.js, Python, PostgreSQL, AWS, Docker, Kubernetes, GraphQL, CI/CD, System Design, REST APIs, Redis, Git</p>
 </section>
 
 <!-- ===================== EXPERIENCE ===================== -->

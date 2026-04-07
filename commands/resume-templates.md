@@ -9,12 +9,12 @@ Available templates are in `${CLAUDE_PLUGIN_ROOT}/templates/`:
 
 | Template | Best For | Style |
 |---|---|---|
-| **minimal** | Tech, engineering, software | Single-column, monochrome, sans-serif, skills prominent |
-| **professional** | Business, finance, consulting | Serif headings, traditional layout, formal, navy accents |
-| **modern** | General roles, startups, product | Teal accent header, clean sans-serif, balanced |
-| **academic** | Research, education, academia | Dense, serif, publication-focused, minimal decoration |
-| **creative** | Design, marketing, creative | Two-column sidebar, bold colors, visual hierarchy |
-| **executive** | Senior leadership, C-suite, VP+ | Elegant, generous whitespace, serif headings, gold accents |
+| **minimal** | Tech, engineering, software | Swiss brutalist typography, dramatic size contrast, monospace accents, red vertical accent |
+| **professional** | Business, finance, consulting | Luxury stationery, Cormorant Garamond serif, paper texture, bronze accents |
+| **modern** | General roles, startups, product | Neo-editorial magazine layout, oversized initials, navy + amber palette |
+| **academic** | Research, education, academia | Oxford press elegance, EB Garamond, drop caps, scholarly crimson accents |
+| **creative** | Design, marketing, creative | Art Deco geometric patterns, dark sidebar, gold metallic accents |
+| **executive** | Senior leadership, C-suite, VP+ | Dark mode architectural blueprint, grid overlay, technical precision |
 
 **Steps:**
 

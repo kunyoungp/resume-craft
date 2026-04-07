@@ -126,7 +126,20 @@ This classification drives the template suggestion in resume generation:
 - executive/leadership → `executive` template
 - general → `modern` template
 
-### 8. Experience Level Indicators
+### 8. Language Detection
+
+Identify the primary language of the job description. This determines what language the resume and cover letter should be written in.
+
+- **Detect the language** the JD is written in (e.g., English, Korean, Japanese, German, French, Spanish, etc.)
+- **Check for mixed-language signals** — some JDs are written in one language but include English technical terms, company names, or acronyms. This is normal; the primary language is the one used for the body text (responsibilities, qualifications, descriptions).
+- **Flag ambiguous cases** — If the JD mixes two languages roughly equally (e.g., half Korean, half English), or if the language doesn't clearly match the company's location/market, mark the language as "ambiguous" so the orchestrating command can clarify with the user.
+
+Include in the output:
+- **Language:** The detected primary language (e.g., "Korean", "English", "Japanese")
+- **Confidence:** "clear" if the JD is predominantly in one language, "ambiguous" if mixed or unclear
+- **Note:** Any relevant context (e.g., "JD is in Korean with English technical terms", "JD is in English but the company is based in Japan")
+
+### 9. Experience Level Indicators
 
 Extract all signals about the expected experience level:
 
@@ -182,6 +195,11 @@ Present the analysis to the user in this structured format:
 - Years required: [X]
 - Education: [requirement]
 - Certifications: [if any]
+
+**Language:**
+- Detected: [language name]
+- Confidence: [clear / ambiguous]
+- Note: [any relevant context, e.g., "Korean with English tech terms"]
 ```
 
 ---
@@ -200,17 +218,30 @@ If `~/.claude/resume-craft/profile.json` exists, perform an automatic gap analys
 
 5. Calculate a preliminary keyword match rate: count how many of the top 20 extracted keywords appear in the user's profile, and report the percentage.
 
+6. Classify each gap by severity:
+   - **Major gap**: A required skill or qualification is completely absent from the user's profile AND no transferable or related skill can be identified. Examples: a required certification the user does not hold, a required programming language with zero related experience, a required degree the user lacks.
+   - **Minor gap**: Either (a) a preferred/nice-to-have skill is missing, or (b) a required skill is not listed but is partially covered by a related or transferable skill in the profile.
+
+7. Assign an overall **match verdict** based on major gap count:
+   - **Strong match** (zero major gaps): The user's profile covers all core requirements. Resume tailoring can focus on optimization rather than gap management.
+   - **Moderate match** (1-2 major gaps): The user is a plausible candidate but has notable gaps that need strategic handling through the interactive clarification step.
+   - **Weak match** (3+ major gaps): Significant gaps exist. The user should be warned and asked whether to proceed.
+
+   The keyword match rate (from step 5) is reported alongside the verdict as informational context — it helps gauge ATS readiness but does not change the verdict itself.
+
 Present the gap analysis clearly:
 
 ```
 **Gap Analysis:**
+- **Match Verdict: [Strong Match / Moderate Match / Weak Match]**
 - Matching keywords: X/20 (Y%)
 - Strong matches: [list skills that directly match]
 - Partial matches: [list transferable skills]
-- Gaps: [list missing requirements with strategy notes]
+- Major gaps: [list required skills completely missing, with strategy notes]
+- Minor gaps: [list preferred skills missing or partially covered, with strategy notes]
 ```
 
-This analysis gives the user full visibility into their fit and prepares the resume-generation skill to make strategic tailoring decisions.
+This analysis gives the user full visibility into their fit, triggers the interactive gap clarification step (Step 2d in the resume command) when needed, and prepares the resume-generation skill to make strategic tailoring decisions.
 
 ---
 

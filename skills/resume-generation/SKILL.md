@@ -10,6 +10,26 @@ Generate professional, ATS-optimized resumes and cover letters that read as auth
 
 ---
 
+## Language Matching
+
+The resume and cover letter MUST be written in the same language as the job posting. This is determined during job analysis and confirmed with the user before generation begins.
+
+### Rules
+
+- **All content** — section headers, professional summary, bullet points, cover letter paragraphs — must be in the target language
+- **Technical terms stay as-is** — Tool names ("React", "PostgreSQL"), certifications ("AWS Certified"), product names, and widely-recognized acronyms should remain in their original form regardless of target language. These are universal and ATS systems match on exact strings.
+- **Natural translation, not literal** — When the user's profile is in a different language than the JD, translate achievements and descriptions idiomatically. A stiff, word-for-word translation reads worse than a slightly reworded version that sounds natural.
+- **Professional register** — Each language has its own conventions for professional documents. Match them:
+  - Korean: formal polite style (~했습니다, ~하였습니다), 존댓말 throughout
+  - Japanese: です/ます form, appropriate keigo
+  - German: formal Sie form
+  - French: professional register, vous form
+  - Spanish: formal usted form for business contexts
+  - Other languages: use the standard formal/professional register
+- **AI-avoidance in any language** — The banned word list in `references/ai-avoidance.md` is English-specific, but the principle applies universally. Avoid generic, overused filler phrases in whatever language you're writing. Be specific, concrete, and authentic.
+
+---
+
 ## Resume Writing Rules
 
 ### Bullet Point Formula
@@ -66,6 +86,53 @@ GOOD: "Backend engineer with 6 years building distributed systems in Go and Pyth
 
 ---
 
+## Match-Based Content Strategy
+
+When match analysis data is available from the gap clarification step (Step 2d), use these rules to prioritize and weight content throughout the resume and cover letter.
+
+### Content Ordering by Match Strength
+
+**Professional Summary (highest impact):**
+- The summary MUST open with the candidate's strongest match to the JD. If the JD's primary requirement is "5+ years of Python backend development" and the user has 7 years, that goes first.
+- Pack the summary with strong-match keywords. Every word in the summary should earn its place by addressing a JD requirement.
+- Do not waste summary space on skills or experience that don't map to JD requirements.
+
+**Work Experience Bullets:**
+- Within each role, order bullets by relevance to the JD — strongest matches first.
+- If a role has 4-5 bullets, at least the first 2 should directly demonstrate a required skill or address a key responsibility from the JD.
+- Bullets demonstrating strong-match skills may be given slightly more detail (the full Action + Task + Result treatment with specific metrics).
+- Bullets for non-matching experience can be more concise — they show breadth but should not dominate.
+
+**Skills Section:**
+- Within each skill category, list JD-matching skills before non-matching ones.
+- If the JD uses specific groupings (e.g., "Experience with AWS services (EC2, S3, Lambda)"), mirror that grouping in the skills section.
+
+### Handling User-Clarified Gaps
+
+When the user provided related experience during the gap clarification step that is not in their profile:
+
+1. **Incorporate it as a legitimate bullet or skill mention** — the user confirmed this experience, so it carries the same factual weight as profile data.
+2. **Frame it using transferable language** — do not claim the exact skill the JD requires if the user has a related but different skill. Instead, describe what they DID do in a way that demonstrates the underlying competency.
+   - Example: JD requires "Kubernetes." User clarified they managed Docker Swarm clusters. Write: "Orchestrated containerized microservices across a 12-node Docker Swarm cluster, managing deployment pipelines and service discovery for 30+ services." This honestly represents their experience while demonstrating container orchestration competency.
+3. **Place these bullets strategically** — in a work experience role where the related experience occurred, positioned after direct-match bullets but before unrelated content.
+
+### Handling Confirmed Gaps (No Coverage)
+
+When a skill is confirmed as a gap with no related experience:
+
+1. **Do not mention it.** Do not try to imply proficiency through vague language.
+2. **Do not leave a visible hole** — instead, strengthen the surrounding content to emphasize what the user DOES bring. If a required skill is missing, the resume should compensate by making the user's other qualifications exceptionally compelling.
+3. **In the skills section**, do not list the missing skill. Only list skills the user genuinely has.
+
+### Cover Letter Match Strategy
+
+- **Opening hook:** Always anchor to the single strongest match between the user's experience and the JD's primary requirement. The first sentence should make the hiring manager think "this person has exactly what we need."
+- **Achievement expansion:** Choose 1-2 achievements to expand that directly address the role's top responsibilities. Prefer achievements where the user can cite specific metrics that map to the job's scope.
+- **Addressing clarified gaps (optional, use judgment):** If the user clarified relevant adjacent experience for a major gap, it CAN be briefly mentioned in the cover letter as a demonstration of learning agility or breadth — but only if it strengthens the narrative. Do not force it.
+- **Never mention confirmed gaps.** The cover letter should project confidence, not apologize for missing skills.
+
+---
+
 ## Cover Letter Rules
 
 ### Length and Structure
@@ -108,6 +175,10 @@ Select the template based on the target role's industry and profession:
 
 When the job analysis identifies the profession/industry classification, map it to the template above. If the user has a preference, respect it — but note if it conflicts with industry norms.
 
+### Custom Template Mode
+
+When no pre-built template is used (`"template": "custom"` in preferences.json), refer to the `frontend-design` skill (`${CLAUDE_PLUGIN_ROOT}/skills/frontend-design/SKILL.md`) for comprehensive design guidance including typography pairing, color palette creation, atmospheric CSS techniques, and aesthetic presets. The custom resume must still comply with all ATS formatting rules from `references/ats-optimization.md`.
+
 ### Template Selection Details
 
 **minimal** — Clean, no-frills layout with plenty of white space. Technology professionals expect this format. Avoids decorative elements that distract from technical content. Works well with dense skills sections and project descriptions.
@@ -135,6 +206,8 @@ Follow all ATS formatting rules from `references/ats-optimization.md`. The criti
 - No graphics, tables, logos, or images in content sections
 - Both acronym and full form for technical terms: "Machine Learning (ML)"
 - Standard fonts at 10-12pt size
+
+For visual design guidance beyond ATS compliance (typography, color, atmosphere), see the `frontend-design` skill.
 
 ---
 

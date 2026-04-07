@@ -4,9 +4,24 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Resume — Creative Template</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Raleway:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   /* === Reset & Base === */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --primary: #1a1a2e;
+    --secondary: #16213e;
+    --accent: #e94560;
+    --gold: #d4af37;
+    --gold-light: rgba(212, 175, 55, 0.15);
+    --text-light: #e2e8f0;
+    --text-dark: #1a1a2e;
+    --sidebar-bg: #1a1a2e;
+    --main-bg: #fefefe;
+  }
 
   @page {
     size: A4;
@@ -20,12 +35,12 @@
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    color: #1a1a1a;
+    font-family: 'Raleway', sans-serif;
+    color: var(--text-dark);
     line-height: 1.5;
     max-width: 794px;
     margin: 0 auto;
-    background: #fff;
+    background: var(--main-bg);
     display: flex;
     min-height: 1123px; /* A4 height at 96dpi */
   }
@@ -33,35 +48,63 @@
   /* === Sidebar (Left ~30%) === */
   .sidebar {
     width: 30%;
-    background: #2d3748;
-    color: #e2e8f0;
+    background-color: var(--sidebar-bg);
+    background-image:
+      repeating-linear-gradient(
+        120deg, transparent, transparent 20px,
+        rgba(212, 175, 55, 0.03) 20px, rgba(212, 175, 55, 0.03) 21px
+      ),
+      repeating-linear-gradient(
+        60deg, transparent, transparent 20px,
+        rgba(212, 175, 55, 0.03) 20px, rgba(212, 175, 55, 0.03) 21px
+      );
+    color: var(--text-light);
     padding: 36px 22px 30px;
     flex-shrink: 0;
   }
 
+  /* === Sidebar: Photo (Hexagonal) === */
   .sidebar-photo {
     width: 90px;
     height: 90px;
-    border-radius: 50%;
-    background: #4a5568;
+    background: var(--secondary);
+    border: 2px solid var(--gold);
     margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 32px;
-    color: #a0aec0;
-    font-weight: 700;
+    position: relative;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   }
 
+  .sidebar-photo::before {
+    content: "";
+    position: absolute;
+    inset: 24px;
+    border: 2px solid rgba(212, 175, 55, 0.9);
+    border-radius: 50%;
+  }
+
+  /* === Sidebar Section Headers === */
   .sidebar h3 {
-    font-size: 11px;
-    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 12px;
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    color: #e53e3e;
-    margin-bottom: 10px;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #4a5568;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    position: relative;
+  }
+
+  .sidebar h3::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    background: var(--gold);
   }
 
   .sidebar-section { margin-bottom: 24px; }
@@ -75,28 +118,38 @@
   }
 
   .contact-list li {
+    font-family: 'Raleway', sans-serif;
     font-size: 12px;
+    font-weight: 400;
     margin-bottom: 6px;
     line-height: 1.5;
     color: #cbd5e0;
     word-break: break-word;
+    transition: transform 0.2s ease;
+  }
+
+  .contact-list li:hover {
+    transform: translateX(2px);
   }
 
   .contact-list li strong {
     display: block;
+    font-family: 'Raleway', sans-serif;
     font-size: 10px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #a0aec0;
+    letter-spacing: 1px;
+    color: var(--gold);
     margin-bottom: 1px;
   }
 
   .contact-list a {
     color: #cbd5e0;
     text-decoration: none;
+    transition: color 0.2s ease;
   }
 
-  .contact-list a:hover { color: #fff; }
+  .contact-list a:hover { color: var(--gold); }
 
   /* === Sidebar: Skills === */
   /* {{skills}} — array of {name, level, keywords[]} */
@@ -104,31 +157,35 @@
   .skill-category:last-child { margin-bottom: 0; }
 
   .skill-category-name {
+    font-family: 'Raleway', sans-serif;
     font-size: 12px;
     font-weight: 600;
-    color: #e2e8f0;
+    color: var(--text-light);
     margin-bottom: 6px;
   }
 
   .skill-bar-group { margin-bottom: 5px; }
 
   .skill-bar-label {
+    font-family: 'Raleway', sans-serif;
     font-size: 11px;
-    color: #a0aec0;
+    font-weight: 400;
+    color: rgba(212, 175, 55, 0.7);
     margin-bottom: 2px;
   }
 
   .skill-bar {
     height: 5px;
-    background: #4a5568;
-    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 0;
     overflow: hidden;
   }
 
   .skill-bar-fill {
     height: 100%;
-    background: #e53e3e;
-    border-radius: 3px;
+    background: linear-gradient(90deg, #d4af37, #f0d78c);
+    border-radius: 0;
+    position: relative;
   }
 
   .skill-tags {
@@ -139,11 +196,20 @@
   }
 
   .skill-tags li {
+    font-family: 'Raleway', sans-serif;
     font-size: 10.5px;
-    color: #cbd5e0;
-    background: #4a5568;
+    font-weight: 500;
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.2);
     padding: 2px 8px;
-    border-radius: 3px;
+    border-radius: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .skill-tags li:hover {
+    background: rgba(212, 175, 55, 0.2);
+    transform: translateX(2px);
   }
 
   /* === Sidebar: Languages === */
@@ -152,16 +218,24 @@
   }
 
   .lang-list li {
+    font-family: 'Raleway', sans-serif;
     font-size: 12px;
+    font-weight: 400;
     color: #cbd5e0;
     margin-bottom: 4px;
     display: flex;
     justify-content: space-between;
+    transition: transform 0.2s ease;
+  }
+
+  .lang-list li:hover {
+    transform: translateX(2px);
   }
 
   .lang-level {
     font-size: 11px;
-    color: #a0aec0;
+    font-weight: 500;
+    color: var(--gold);
   }
 
   /* === Sidebar: Interests === */
@@ -173,17 +247,29 @@
   }
 
   .interest-tags li {
+    font-family: 'Raleway', sans-serif;
     font-size: 11px;
-    color: #cbd5e0;
-    background: #4a5568;
+    font-weight: 500;
+    color: var(--gold);
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.15);
     padding: 3px 10px;
-    border-radius: 12px;
+    border-radius: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+
+  .interest-tags li:hover {
+    background: rgba(212, 175, 55, 0.18);
+    transform: translateX(2px);
   }
 
   /* === Main Content (Right ~70%) === */
   .main {
     width: 70%;
     padding: 36px 32px 30px;
+    background:
+      radial-gradient(ellipse at 30% 20%, rgba(212, 175, 55, 0.04) 0%, transparent 60%),
+      var(--main-bg);
   }
 
   /* === Main: Name & Title === */
@@ -191,52 +277,93 @@
   .main-header { margin-bottom: 20px; }
 
   .main-header h1 {
+    font-family: 'Poiret One', cursive;
     font-size: 30px;
-    font-weight: 800;
-    color: #1a202c;
-    letter-spacing: -0.5px;
+    font-weight: 400;
+    color: var(--primary);
+    letter-spacing: 2px;
     line-height: 1.2;
   }
 
   .main-header .job-title {
-    font-size: 16px;
-    font-weight: 500;
-    color: #e53e3e;
-    margin-top: 2px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-top: 4px;
   }
 
   /* === Main: Summary === */
   /* {{basics.summary}} */
   .main-summary {
-    font-size: 13px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 12.5px;
+    font-weight: 400;
     color: #4a5568;
     line-height: 1.65;
     margin-bottom: 22px;
     padding-bottom: 16px;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    position: relative;
+  }
+
+  .main-summary::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
   }
 
   /* === Main: Sections === */
   .main-section { margin-bottom: 22px; }
 
   .main-section h2 {
-    font-size: 13px;
-    font-weight: 700;
+    font-family: 'Poiret One', cursive;
+    font-size: 14px;
+    font-weight: 400;
     text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: #e53e3e;
-    margin-bottom: 12px;
-    padding-bottom: 4px;
-    border-bottom: 2px solid #e53e3e;
-    display: inline-block;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+    display: block;
+    position: relative;
+  }
+
+  .main-section h2::before {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 7px;
+    height: 7px;
+    background: var(--gold);
   }
 
   .main-section .section-content { clear: both; }
 
   /* === Main: Experience === */
   /* {{work}} — array of {name, position, startDate, endDate, summary, highlights[]} */
-  .entry { margin-bottom: 16px; }
+  .entry {
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    border-left: 2px solid rgba(212, 175, 55, 0.2);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
   .entry:last-child { margin-bottom: 0; }
+
+  .entry:hover {
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.08);
+    border-left-color: var(--gold);
+  }
 
   .entry-header {
     display: flex;
@@ -247,20 +374,25 @@
   }
 
   .entry-position {
+    font-family: 'Raleway', sans-serif;
     font-size: 14px;
-    font-weight: 700;
-    color: #1a202c;
+    font-weight: 600;
+    color: var(--primary);
   }
 
   .entry-dates {
+    font-family: 'Raleway', sans-serif;
     font-size: 11px;
-    color: #718096;
+    font-weight: 500;
+    color: var(--gold);
     white-space: nowrap;
+    letter-spacing: 0.5px;
   }
 
   .entry-company {
+    font-family: 'Raleway', sans-serif;
     font-size: 13px;
-    color: #e53e3e;
+    color: var(--accent);
     font-weight: 600;
     margin-bottom: 2px;
   }
@@ -271,55 +403,117 @@
   }
 
   .entry ul li {
+    font-family: 'Raleway', sans-serif;
     font-size: 12.5px;
+    font-weight: 400;
     color: #4a5568;
     margin-bottom: 2px;
     line-height: 1.5;
   }
 
+  .entry ul li::marker {
+    color: var(--gold);
+  }
+
   /* === Main: Education === */
   /* {{education}} — array of {institution, area, studyType, startDate, endDate, score} */
-  .edu-entry { margin-bottom: 10px; }
+  .edu-entry {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-left: 2px solid rgba(212, 175, 55, 0.2);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
   .edu-entry:last-child { margin-bottom: 0; }
 
+  .edu-entry:hover {
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.08);
+    border-left-color: var(--gold);
+  }
+
   .edu-degree {
+    font-family: 'Raleway', sans-serif;
     font-size: 13px;
-    font-weight: 700;
-    color: #1a202c;
+    font-weight: 600;
+    color: var(--primary);
   }
 
   .edu-school {
+    font-family: 'Raleway', sans-serif;
     font-size: 12px;
+    font-weight: 400;
     color: #718096;
   }
 
   .edu-dates {
+    font-family: 'Raleway', sans-serif;
     font-size: 11px;
-    color: #a0aec0;
+    font-weight: 500;
+    color: var(--gold);
   }
 
   /* === Main: Projects === */
   /* {{projects}} — array of {name, description, highlights[], url} */
-  .project { margin-bottom: 10px; }
+  .project {
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-left: 2px solid rgba(212, 175, 55, 0.2);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
   .project:last-child { margin-bottom: 0; }
 
+  .project:hover {
+    box-shadow: 0 2px 12px rgba(212, 175, 55, 0.08);
+    border-left-color: var(--gold);
+  }
+
   .project-name {
+    font-family: 'Raleway', sans-serif;
     font-size: 13px;
-    font-weight: 700;
-    color: #1a202c;
+    font-weight: 600;
+    color: var(--primary);
   }
 
   .project-name a {
-    color: #e53e3e;
+    color: var(--gold);
     text-decoration: none;
+    transition: color 0.2s ease;
   }
 
-  .project-name a:hover { text-decoration: underline; }
+  .project-name a:hover { color: var(--accent); }
 
   .project-desc {
+    font-family: 'Raleway', sans-serif;
     font-size: 12px;
+    font-weight: 400;
     color: #4a5568;
     margin-top: 2px;
+  }
+
+  /* === Shimmer Animation for Gold Elements === */
+  @keyframes shimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  .skill-bar-fill:hover {
+    background: linear-gradient(
+      90deg,
+      #d4af37 0%, #f0d78c 30%, #fff8dc 50%, #f0d78c 70%, #d4af37 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease infinite;
+  }
+
+  .sidebar h3:hover {
+    background: linear-gradient(
+      90deg,
+      var(--gold) 0%, #f0d78c 30%, #fff8dc 50%, #f0d78c 70%, var(--gold) 100%
+    );
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 2s ease infinite;
   }
 
   /* === Print === */
@@ -328,8 +522,41 @@
     body { max-width: none; min-height: auto; }
     .no-print { display: none !important; }
     a { color: inherit; text-decoration: none; }
-    .sidebar { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-    .entry { break-inside: avoid; }
+    .sidebar {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .entry, .edu-entry, .project { break-inside: avoid; }
+
+    /* Disable all animations and transitions for print */
+    *, *::before, *::after {
+      animation: none !important;
+      transition: none !important;
+    }
+
+    .contact-list li:hover,
+    .skill-tags li:hover,
+    .lang-list li:hover,
+    .interest-tags li:hover {
+      transform: none !important;
+    }
+
+    .entry:hover,
+    .edu-entry:hover,
+    .project:hover {
+      box-shadow: none !important;
+    }
+
+    .skill-bar-fill:hover {
+      background: linear-gradient(90deg, #d4af37, #f0d78c) !important;
+      animation: none !important;
+    }
+
+    .sidebar h3:hover {
+      background: none !important;
+      -webkit-text-fill-color: var(--gold) !important;
+      animation: none !important;
+    }
   }
 </style>
 </head>
@@ -339,7 +566,7 @@
 <aside class="sidebar">
 
   <!-- Photo placeholder -->
-  <div class="sidebar-photo">RM</div>
+  <div class="sidebar-photo" aria-hidden="true"></div>
 
   <!-- === Contact === -->
   <!-- {{basics.email}}, {{basics.phone}}, {{basics.url}} -->
