@@ -22,37 +22,14 @@ A Claude Code plugin that generates custom, ATS-optimized resumes and cover lett
 
 ## Installation
 
-### Option 1: From the marketplace
-
-Add the marketplace to your Claude Code settings (project or user level):
-
-```json
-{
-  "plugin_marketplaces": [
-    "https://github.com/kunyoungp/resume-craft"
-  ]
-}
-```
-
-Then install the plugin from within Claude Code:
+### Option 1: Install from marketplace
 
 ```
-/install-plugin resume-craft
+/plugin marketplace add kunyoungp/resume-craft
+/plugin install resume-craft@resume-craft-marketplace
 ```
 
-### Option 2: Direct plugin install
-
-Add the plugin directly to your `.claude/settings.json`:
-
-```json
-{
-  "plugins": [
-    "https://github.com/kunyoungp/resume-craft"
-  ]
-}
-```
-
-### Option 3: Clone locally
+### Option 2: Clone locally
 
 ```bash
 git clone https://github.com/kunyoungp/resume-craft.git
