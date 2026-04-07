@@ -66,7 +66,7 @@ npx playwright install chromium
 /resume-profile
 ```
 
-Walks you through a guided Q&A to build your professional profile. Saved to `~/.claude/resume-craft/profile.json` using the [JSON Resume](https://jsonresume.org/) schema.
+Walks you through a guided Q&A to build your professional profile. Saved to `.resume-craft/profile.json` using the [JSON Resume](https://jsonresume.org/) schema.
 
 ### 2. Browse templates
 
@@ -238,7 +238,7 @@ Every document passes three checks:
 All user data is stored locally:
 
 ```
-~/.claude/resume-craft/
+.resume-craft/
 ├── profile.json              # Your professional profile
 ├── cover-letter-profile.json # Cover letter tone and stories
 ├── preferences.json          # Template selection

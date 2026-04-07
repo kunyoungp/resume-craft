@@ -146,7 +146,7 @@ This information is not optional — it is the key ingredient that makes cover l
 
 ### Profile Data
 
-Save the complete profile to `~/.claude/resume-craft/profile.json` following the JSON Resume schema (https://jsonresume.org/schema). Map collected data to these top-level fields:
+Save the complete profile to `.resume-craft/profile.json` following the JSON Resume schema (https://jsonresume.org/schema). Map collected data to these top-level fields:
 
 - `basics` — name, email, phone, location, url, profiles (LinkedIn, etc.)
 - `work` — array of work experience entries with name, position, startDate, endDate, highlights
@@ -161,7 +161,7 @@ Save the complete profile to `~/.claude/resume-craft/profile.json` following the
 
 ### Cover Letter Context
 
-Save cover letter preferences and context to `~/.claude/resume-craft/cover-letter-profile.json` with this structure:
+Save cover letter preferences and context to `.resume-craft/cover-letter-profile.json` with this structure:
 
 ```json
 {
@@ -174,13 +174,13 @@ Save cover letter preferences and context to `~/.claude/resume-craft/cover-lette
 
 ### Directory Creation
 
-Create the `~/.claude/resume-craft/` directory if it does not already exist. Use `mkdir -p ~/.claude/resume-craft/` before writing any files.
+Create the `.resume-craft/` directory if it does not already exist. Use `mkdir -p .resume-craft/` before writing any files.
 
 ---
 
 ## Update Mode
 
-If `~/.claude/resume-craft/profile.json` already exists when the user invokes this skill:
+If `.resume-craft/profile.json` already exists when the user invokes this skill:
 
 1. Read the existing profile file.
 2. Present a clear summary of what is currently stored, organized by section:

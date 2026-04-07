@@ -16,9 +16,9 @@ This command should feel like a single action, not a multi-step wizard. The rule
 
 ## Prerequisites Check
 
-1. Check if `~/.claude/resume-craft/profile.json` exists.
+1. Check if `.resume-craft/profile.json` exists.
    - If NOT: tell the user "You need to set up your profile first. Run `/resume-profile` to get started." and STOP.
-2. Check if `~/.claude/resume-craft/preferences.json` exists.
+2. Check if `.resume-craft/preferences.json` exists.
    - If NOT: use "modern" as the default template.
 
 ## Step 1: Get Job Description
@@ -48,7 +48,7 @@ Determine the output language from the JD analysis:
 
 ### 2c. Template Selection
 
-Read `~/.claude/resume-craft/preferences.json` for the saved template.
+Read `.resume-craft/preferences.json` for the saved template.
 - If a template is saved: use it silently.
 - If no preference saved or set to "auto": auto-select based on the JD's industry classification. Do not ask.
 
@@ -103,16 +103,16 @@ After this step, the following data feeds into Step 3:
 
 This step runs automatically with no user interaction.
 
-Read the user profile from `~/.claude/resume-craft/profile.json`.
+Read the user profile from `.resume-craft/profile.json`.
 Read the selected template from `${CLAUDE_PLUGIN_ROOT}/templates/{template}/index.html` (or custom path).
-Read the cover letter profile from `~/.claude/resume-craft/cover-letter-profile.json` if it exists.
+Read the cover letter profile from `.resume-craft/cover-letter-profile.json` if it exists.
 
 Invoke the `resume-craft:resume-generation` skill for writing guidelines.
 
 ### Resume
 
 Generate the resume by:
-1. Creating output directory: `~/.claude/resume-craft/outputs/YYYY-MM-DD-{company-name-slug}/`
+1. Creating output directory: `.resume-craft/outputs/YYYY-MM-DD-{company-name-slug}/`
 2. Taking the template HTML and replacing all sample content with tailored content from the user's profile
 3. Tailoring every bullet point to match JD keywords (target 65-75% keyword match)
 4. Writing each bullet as: Action Verb + Task/Project + Quantified Result
@@ -148,18 +148,18 @@ Invoke the `resume-craft:verification` skill:
 
 Open the resume and cover letter in the browser for preview:
 ```bash
-node ${CLAUDE_PLUGIN_ROOT}/scripts/preview.mjs ~/.claude/resume-craft/outputs/{date}-{company}/resume.html
-node ${CLAUDE_PLUGIN_ROOT}/scripts/preview.mjs ~/.claude/resume-craft/outputs/{date}-{company}/cover-letter.html
+node ${CLAUDE_PLUGIN_ROOT}/scripts/preview.mjs .resume-craft/outputs/{date}-{company}/resume.html
+node ${CLAUDE_PLUGIN_ROOT}/scripts/preview.mjs .resume-craft/outputs/{date}-{company}/cover-letter.html
 ```
 
 Export both to PDF:
 ```bash
 node ${CLAUDE_PLUGIN_ROOT}/scripts/export-pdf.mjs \
-  ~/.claude/resume-craft/outputs/{date}-{company}/resume.html \
-  ~/.claude/resume-craft/outputs/{date}-{company}/resume.pdf
+  .resume-craft/outputs/{date}-{company}/resume.html \
+  .resume-craft/outputs/{date}-{company}/resume.pdf
 node ${CLAUDE_PLUGIN_ROOT}/scripts/export-pdf.mjs \
-  ~/.claude/resume-craft/outputs/{date}-{company}/cover-letter.html \
-  ~/.claude/resume-craft/outputs/{date}-{company}/cover-letter.pdf
+  .resume-craft/outputs/{date}-{company}/cover-letter.html \
+  .resume-craft/outputs/{date}-{company}/cover-letter.pdf
 ```
 
 Present the final output:
@@ -167,7 +167,7 @@ Present the final output:
 ```
 Done! Preview is open in your browser.
 
-Files saved to: ~/.claude/resume-craft/outputs/{date}-{company}/
+Files saved to: .resume-craft/outputs/{date}-{company}/
 - resume.html / resume.pdf
 - cover-letter.html / cover-letter.pdf
 

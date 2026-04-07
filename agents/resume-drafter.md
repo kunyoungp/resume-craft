@@ -33,9 +33,9 @@ Take a JSON Resume profile, a job description analysis, and a template to produc
 
 **Process:**
 
-1. Read the user's profile from `~/.claude/resume-craft/profile.json`
-2. Read cover letter context from `~/.claude/resume-craft/cover-letter-profile.json` (if it exists — cover letter is always generated)
-3. Read the template preferences from `~/.claude/resume-craft/preferences.json`
+1. Read the user's profile from `.resume-craft/profile.json`
+2. Read cover letter context from `.resume-craft/cover-letter-profile.json` (if it exists — cover letter is always generated)
+3. Read the template preferences from `.resume-craft/preferences.json`
 4. Read the selected template:
    - If template is a named template (minimal, modern, creative, professional, executive, academic): read `${CLAUDE_PLUGIN_ROOT}/templates/{template-name}/index.html`
    - If template is `"custom"` with a `customTemplatePath`: read the HTML from that path
@@ -107,7 +107,7 @@ When `preferences.json` has `"template": "custom"` and no `customTemplatePath`, 
 5. Include the standard template comment annotations (`<!-- {{basics.name}} -->`, etc.) so the verifier can audit the output
 
 **Output:**
-- Create directory: `~/.claude/resume-craft/outputs/YYYY-MM-DD-{company-name-slug}/`
+- Create directory: `.resume-craft/outputs/YYYY-MM-DD-{company-name-slug}/`
 - Write `resume.html` to that directory
 - Write `cover-letter.html`
 - Report the file paths when done

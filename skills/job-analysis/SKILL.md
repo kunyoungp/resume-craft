@@ -206,7 +206,7 @@ Present the analysis to the user in this structured format:
 
 ## Gap Analysis (When Profile Is Available)
 
-If `~/.claude/resume-craft/profile.json` exists, perform an automatic gap analysis after presenting the JD analysis:
+If `.resume-craft/profile.json` exists, perform an automatic gap analysis after presenting the JD analysis:
 
 1. Compare the required skills list against the user's profile skills.
 2. Identify matches (skills the user has that the JD requires).
@@ -270,4 +270,4 @@ Internal postings may omit company name or use internal jargon. Ask the user to 
 
 Do not save the analysis to a file unless the user explicitly asks to save it. The analysis is presented conversationally and feeds into the next step of the workflow (resume generation) through context.
 
-If the user asks to save it, write to `~/.claude/resume-craft/last-analysis.json` with the structured data from the analysis.
+If the user asks to save it, write to `.resume-craft/last-analysis.json` with the structured data from the analysis.

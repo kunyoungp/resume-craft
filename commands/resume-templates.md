@@ -30,7 +30,7 @@ Available templates are in `${CLAUDE_PLUGIN_ROOT}/templates/`:
 
 4. Ask which template they want to use. They can also provide a path to their own custom HTML template.
 
-5. Save the selection to `~/.claude/resume-craft/preferences.json`:
+5. Save the selection to `.resume-craft/preferences.json`:
    ```json
    {
      "template": "modern",

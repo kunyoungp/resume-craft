@@ -34,7 +34,7 @@ Verify that a drafted resume and/or cover letter is factually accurate, sounds a
 **Verification Process:**
 
 **Phase 1: Factual Accuracy**
-- Read the user's profile from `~/.claude/resume-craft/profile.json`
+- Read the user's profile from `.resume-craft/profile.json`
 - Read the generated resume HTML from the output directory
 - Cross-reference EVERY claim:
   - Job titles must match profile exactly (no embellishment)

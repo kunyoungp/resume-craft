@@ -16,9 +16,9 @@ Zero tolerance for hallucinated or unverifiable content. Every claim in the docu
 
 ### Setup
 
-1. Read the user's profile from `~/.claude/resume-craft/profile.json`.
+1. Read the user's profile from `.resume-craft/profile.json`.
 2. Read the generated resume or cover letter content (HTML file or in-memory content).
-3. If the profile file does not exist, warn the user: "No profile found at ~/.claude/resume-craft/profile.json. I cannot verify factual accuracy without a profile. Please run the profile builder first or provide your profile data."
+3. If the profile file does not exist, warn the user: "No profile found at .resume-craft/profile.json. I cannot verify factual accuracy without a profile. Please run the profile builder first or provide your profile data."
 
 ### Cross-Reference Checklist
 
