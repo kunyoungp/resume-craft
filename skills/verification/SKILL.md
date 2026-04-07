@@ -63,7 +63,7 @@ Scan the document for patterns that AI-detection tools and experienced recruiter
 
 ### Banned Word/Phrase Check
 
-Reference the banned word list from the resume-generation skill: `@${CLAUDE_PLUGIN_ROOT}/skills/resume-generation/references/ai-avoidance.md`
+Reference the banned word list from the resume-generation skill: `${CLAUDE_PLUGIN_ROOT}/skills/resume-generation/references/ai-avoidance.md`
 
 Scan the entire document for every word and phrase on the banned list. For each match found:
 - Note the exact location (section, bullet number, or paragraph)

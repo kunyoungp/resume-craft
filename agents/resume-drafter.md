@@ -34,7 +34,7 @@ Take a JSON Resume profile, a job description analysis, and a template to produc
 **Process:**
 
 1. Read the user's profile from `~/.claude/resume-craft/profile.json`
-2. Read cover letter context from `~/.claude/resume-craft/cover-letter-profile.json` (if cover letter requested)
+2. Read cover letter context from `~/.claude/resume-craft/cover-letter-profile.json` (if it exists — cover letter is always generated)
 3. Read the template preferences from `~/.claude/resume-craft/preferences.json`
 4. Read the selected template:
    - If template is a named template (minimal, modern, creative, professional, executive, academic): read `${CLAUDE_PLUGIN_ROOT}/templates/{template-name}/index.html`
