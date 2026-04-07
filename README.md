@@ -22,25 +22,43 @@ A Claude Code plugin that generates custom, ATS-optimized resumes and cover lett
 
 ## Installation
 
-### Option 1: Add as a plugin dependency
+### Option 1: From the marketplace
 
-In your project's `.claude/settings.json`:
+Add the marketplace to your Claude Code settings (project or user level):
 
 ```json
 {
-  "plugins": [
-    "https://github.com/<your-username>/resume-craft"
+  "plugin_marketplaces": [
+    "https://github.com/kunyoungp/resume-craft"
   ]
 }
 ```
 
-### Option 2: Clone locally
+Then install the plugin from within Claude Code:
 
-```bash
-git clone https://github.com/<your-username>/resume-craft.git
+```
+/install-plugin resume-craft
 ```
 
-Then add the local path to your Claude Code settings:
+### Option 2: Direct plugin install
+
+Add the plugin directly to your `.claude/settings.json`:
+
+```json
+{
+  "plugins": [
+    "https://github.com/kunyoungp/resume-craft"
+  ]
+}
+```
+
+### Option 3: Clone locally
+
+```bash
+git clone https://github.com/kunyoungp/resume-craft.git
+```
+
+Then add the local path to your settings:
 
 ```json
 {
@@ -79,13 +97,13 @@ Preview and select from 6 built-in templates optimized for different industries.
 ### 3. Generate a resume
 
 ```
-/resume https://example.com/job-posting
+/craft https://example.com/job-posting
 ```
 
 Or paste the job description directly:
 
 ```
-/resume
+/craft
 ```
 
 The entire pipeline runs automatically from a single command:
@@ -98,7 +116,7 @@ The entire pipeline runs automatically from a single command:
 
 ## End-to-End Flow
 
-The following diagram shows how the full pipeline works when you run `/resume`:
+The following diagram shows how the full pipeline works when you run `/craft`:
 
 ```
 ┌─────────────────┐
@@ -188,7 +206,7 @@ resume-craft/
 │   ├── resume-drafter.md        # Resume/cover letter generation agent
 │   └── resume-verifier.md       # Quality verification agent (read-only)
 ├── commands/
-│   ├── resume.md                # /resume — main generation command
+│   ├── craft.md                 # /craft — main generation command
 │   ├── resume-profile.md        # /resume-profile — profile builder
 │   └── resume-templates.md      # /resume-templates — template browser
 ├── skills/
